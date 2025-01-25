@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "./ui/toaster";
 
 const Providers = ({ children, ...props }: { children: React.ReactNode }) => {
   return (
@@ -11,6 +12,7 @@ const Providers = ({ children, ...props }: { children: React.ReactNode }) => {
       disableTransitionOnChange
     >
       {children}
+      <Toaster />
     </ThemeProvider>
   );
 };

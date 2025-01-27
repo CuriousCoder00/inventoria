@@ -6,6 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function getNameInitial(name: string) {
+  return name[0].toUpperCase();
+}
+
 export const getUserByEmail = async (email: string) => {
   try {
     const user = await db.user.findUnique({ where: { email } });

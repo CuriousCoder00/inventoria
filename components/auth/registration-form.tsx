@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthForm from "./auth-form";
 import { AuthInput } from "./auth-input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
 import { Form } from "../ui/form";
@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 
 const RegistrationForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [isFormEmpty, setIsFormEmpty] = useState<boolean>(true);
   const [tab, setTab] = useState<"1" | "2">("1");
   const { toast } = useToast();
   const router = useRouter();
@@ -67,11 +68,20 @@ const RegistrationForm = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setIsFormEmpty(
+      !form.watch("name") ||
+        !form.watch("email") ||
+        !form.watch("password") ||
+        !form.watch("confirmPassword")
+    );
+  }, [form.watch()]);
   return (
     <AuthForm loading={loading}>
       <Form {...form}>
         <form
-          className="flex flex-col w-full gap-4"
+          className="flex flex-col w-full gap-4 my-4"
           onSubmit={form.handleSubmit(signup)}
         >
           {tab === "1" && (
@@ -100,7 +110,7 @@ const RegistrationForm = () => {
                   Next
                 </Button>
               </div>
-              <Button disabled={loading} type="submit" className="w-full">
+              <Button disabled={loading || isFormEmpty} type="submit" className="w-full">
                 {loading ? <Loader className="animate-spin" /> : "Register"}
               </Button>
             </>
@@ -133,7 +143,7 @@ const RegistrationForm = () => {
                   Previous
                 </Button>
               </div>
-              <Button disabled={loading} type="submit" className="w-full">
+              <Button disabled={loading || isFormEmpty} type="submit" className="w-full">
                 {loading ? <Loader className="animate-spin" /> : "Register"}
               </Button>
             </>

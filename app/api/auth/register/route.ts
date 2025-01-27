@@ -4,6 +4,8 @@ import bcryptjs from "bcryptjs";
 import { db } from "@/lib/prisma.config";
 import { getUserByEmail } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
+import { generateVerificationToken } from "@/lib/tokens";
+import { sendVerificationMail } from "@/lib/mailer";
 
 export const POST = async (req: NextRequest) => {
     try {
@@ -22,7 +24,9 @@ export const POST = async (req: NextRequest) => {
                 name, email, password: hashedPassword
             }
         })
-        return NextResponse.json({ message: "User Registration Successful" }, { status: 201 })
+        const verificationToken = await generateVerificationToken(email);
+        await sendVerificationMail(verificationToken.email, name)
+        return NextResponse.json({ message: "User Registration Successful. Please verify your email to login." }, { status: 201 })
     } catch (error: any) {
         return NextResponse.json({ error: error.message || "Something went wrong." }, { status: 500 })
     }

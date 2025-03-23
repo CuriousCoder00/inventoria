@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AtomIcon, ChevronRight } from "lucide-react";
 import { Spotlight } from "@/components/ui/spotlight-new";
+import Link from "next/link";
 
 export const Hero = () => {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -97,8 +98,10 @@ export const Hero = () => {
           </p>
         </div>
         <div className="flex flex-row gap-3">
-          <Button size="lg" className="gap-4">
-            Get Started <ChevronRight className="w-4 h-4" />
+          <Button asChild size="lg" className="gap-4">
+            <Link href={"/auth/login"}>
+              Get Started <ChevronRight className="w-4 h-4" />
+            </Link>
           </Button>
         </div>
       </div>

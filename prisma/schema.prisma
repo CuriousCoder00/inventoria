@@ -11,8 +11,12 @@ datasource db {
 model User {
   id          String      @id @default(uuid())
   email       String      @unique
+  
   firstName   String
   lastName    String
+
+  image String? @db.Text
+
   password    String
   inventories Inventory[]
   accounts    Account[]
@@ -62,13 +66,16 @@ model PasswordResetToken {
 
   @@unique([email, token])
 }
+
 model Inventory {
   id          Int    @id @default(autoincrement())
-  name        String
+  name        String @unique(map: "Unique_Inventory_Name")
   description String
   user        User   @relation(fields: [userId], references: [id])
   userId      String
   items       Item[]
+
+  @@unique([name])
 }
 
 model Item {

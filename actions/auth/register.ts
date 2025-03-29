@@ -1,5 +1,4 @@
 "use server";
-
 import bcryptjs from "bcryptjs";
 import { RegisterInput } from "@/lib/validations/auth.validation";
 import { generateVerificationToken, getUserByEmail } from "../utils";

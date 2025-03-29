@@ -16,8 +16,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
-import { EyeClosed, EyeIcon } from "lucide-react";
-import { Register } from "@/app/actions/auth/register";
+import { EyeOff, EyeIcon } from "lucide-react";
+import { Register } from "@/actions/auth/register";
+import Link from "next/link";
+import { PropagateLoader } from "react-spinners";
 const RegistrationForm = () => {
   const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
@@ -41,8 +43,8 @@ const RegistrationForm = () => {
     try {
       setLoading(true);
       const res = await Register(data);
-      setLoading(false)
-      console.log(res)
+      setLoading(false);
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +52,25 @@ const RegistrationForm = () => {
 
   return (
     <AuthForm form={form}>
-      <form className="my-8 flex flex-col space-y-4" onSubmit={form.handleSubmit(onRegister)}>
+      <div className="my-4 flex items-center gap-2 justify-start">
+        Already have an account?{" "}
+        <Link
+          className="text-sm hover:underline text-sky-500"
+          href={"/auth/login"}
+        >
+          Login
+        </Link>
+      </div>
+      <div className="my-2 flex items-center justify-center gap-2">
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-2 h-[1px] w-full" />
+        <span>OR</span>
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-2 h-[1px] w-full" />
+      </div>
+      <form
+        className="my-8 flex flex-col space-y-4"
+        onSubmit={form.handleSubmit(onRegister)}
+      >
+        <h4 className="font-bold text-lg mb-4">Create Your Account</h4>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <FormField
             control={form.control}
@@ -125,7 +145,7 @@ const RegistrationForm = () => {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? <EyeClosed/> : <EyeIcon />}
+                    {showPassword ? <EyeOff /> : <EyeIcon />}
                   </Button>
                 </div>
               </FormControl>
@@ -153,7 +173,7 @@ const RegistrationForm = () => {
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
-                    {showConfirmPassword ? <EyeClosed/> : <EyeIcon />}
+                    {showConfirmPassword ? <EyeOff /> : <EyeIcon />}
                   </Button>
                 </div>
               </FormControl>
@@ -163,11 +183,17 @@ const RegistrationForm = () => {
         />
 
         <button
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] cursor-pointer"
           type="submit"
         >
-          Sign up &rarr;
-          <BottomGradient />
+          {loading ? (
+            <PropagateLoader color="#fff" size={10} />
+          ) : (
+            <>
+              Create Account &rarr;
+              <BottomGradient />
+            </>
+          )}
         </button>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-2 h-[1px] w-full" />
       </form>

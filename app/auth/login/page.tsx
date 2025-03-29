@@ -5,7 +5,7 @@ import React from 'react'
 
 const LoginPage = () => {
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
+    <div className='flex flex-col items-center justify-center min-h-dvh pt-16'>
         <Header/>
         <LoginForm/>
     </div>

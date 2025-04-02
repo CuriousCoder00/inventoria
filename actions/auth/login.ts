@@ -3,21 +3,15 @@
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { generateVerificationToken, getUserByEmail } from "../utils";
+import { LoginInput } from "@/lib/validations/auth.validation";
 
-export const Login = async ({
-  data,
-}: {
-  data: { email: string; password: string };
-}) => {
+export const Login = async (data: LoginInput) => {
   const existingUser = await getUserByEmail(data.email);
 
-  if (!existingUser) return { error: "User does not exist" };
-  if (!existingUser.email || !existingUser.password)
-    return { error: "Invalid credentials", status: 400 };
-
+  if (!existingUser) return { success: false, message: "Invalid credentials" };
   if (!existingUser.emailVerified) {
     await generateVerificationToken(existingUser.email);
-    return { warning: "Please check your mail for verification.", status: 400 };
+    return { success: false, message: "Please check your mail for verification.", code: 400, warn: true };
   }
 
   try {
@@ -25,14 +19,14 @@ export const Login = async ({
       email: data.email,
       password: data.password,
     });
-    return { success: "Login successful", status: 200 };
+    return { success: true, message: "Login successful", code: 200 };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials", status: 400 };
+          return { success: false, message: "Invalid credentials", code: 400 };
         default:
-          return { error: "Something went wrong", status: 500 };
+          return { success: false, message: "Something went wrong", code: 500 };
       }
     }
     throw error;

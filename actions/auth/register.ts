@@ -30,7 +30,7 @@ export const Register = async (data: RegisterInput) => {
     });
     const verificationToken = await generateVerificationToken(email);
     await sendVerificationMail(verificationToken.email, firstName);
-    return { success: true, code: 200, message: "Verification Email Sent." };
+    return { success: true, code: 200, message: "User registration successful.", desc: "We've sent you a mail with verification link." };
   } catch (error: any) {
     return { success: false, code: 500, message: error.message || "Internal Server Error" };
   }

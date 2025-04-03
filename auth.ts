@@ -35,9 +35,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
 
       if (session.user) {
-        session.user.firstName = token.firstName;
+        session.user.firstName = token.firstName ?? "";
+        session.user.lastName = token.lastName ?? "";
         session.user.email = token.email ?? "";
         session.user.isOAuth = token.isOAuth;
+        session.user.firstVisit = token.firstVisit ?? null;
       }
       return session;
     },
@@ -49,6 +51,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const existingAccount = await getAccountByUserId(existingUser.id);
       token.isOAuth = !!existingAccount;
       token.firstName = existingUser.firstName;
+      token.lastName = existingUser.lastName;
+      token.firstVisit = existingUser.firstVisit;
       token.email = existingUser.email;
       return token;
     },

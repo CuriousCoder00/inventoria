@@ -23,4 +23,5 @@ export const apiAuthPrefix = "/api/auth";
 /**
  * The default redirect path after logged in
  */
+export const NEW_USER_REDIRECT = "/onboarding";
 export const DEFAULT_LOGIN_REDIRECT = "/dashboard";

@@ -9,6 +9,7 @@ export const createInventory = async (data: InventoryInput) => {
     try {
         const {name, description} = data;
         const session = await auth();
+        console.log(session)
         const existingInventory = await prisma.inventory.findFirst({
             where: {
                 name: {
@@ -28,7 +29,7 @@ export const createInventory = async (data: InventoryInput) => {
             data:{
                 name: name,
                 description: description,
-                userId: "0604a0e9-143c-482f-aa95-3060ddbe08fe"
+                userId: session?.user.id as string,
             }
         })
         return {

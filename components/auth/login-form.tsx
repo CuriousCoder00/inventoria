@@ -19,7 +19,6 @@ import Link from "next/link";
 import { Login } from "@/actions/auth/login";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { DEFAULT_LOGIN_REDIRECT } from "@/lib/routes";
 
 const LoginForm = () => {
   const [loading, setLoading] = React.useState(false);

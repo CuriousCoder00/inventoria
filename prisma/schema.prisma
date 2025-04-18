@@ -73,19 +73,76 @@ model Inventory {
   name        String @unique(map: "Unique_Inventory_Name")
   description String
 
-  address String?
+  image String? @db.Text
+
+  status InventoryStatus @default(ACTIVE)
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
   items  Item[]
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@unique([name])
 }
 
+enum InventoryStatus {
+  ACTIVE
+  ARCHIVED
+  DRAFT
+  OUT_OF_STOCK
+}
+
 model Item {
-  id          Int       @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   description String
+  image       String? @db.Text
+  quantity    Int
+  price       Float
+
+  status ItemStatus @default(AVAILABLE)
+
+  category String
+  tags     String[] @db.Text
+
   inventory   Inventory @relation(fields: [inventoryId], references: [id])
   inventoryId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Sale      Sale[]
+}
+
+enum ItemStatus {
+  AVAILABLE
+  UNAVAILABLE
+  OUT_OF_STOCK
+}
+
+model Visit {
+  id          Int      @id @default(autoincrement())
+  inventoryId Int
+  createdAt   DateTime @default(now())
+}
+
+model Sale {
+  id         Int       @id @default(autoincrement())
+  itemId     Int
+  item       Item      @relation(fields: [itemId], references: [id])
+  userId     String
+  quantity   Int
+  totalPrice Float
+  createdAt  DateTime  @default(now())
+  Customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId String?
+}
+
+model Customer {
+  id     String @id @default(uuid())
+  email  String @unique
+  name   String
+  userId String // owner of the customer (you)
+  sales  Sale[]
 }

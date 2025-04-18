@@ -1,10 +1,7 @@
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
+import { StatCardProps } from "@/lib/index.types";
 import { TrendingDown, TrendingUp } from "lucide-react";
-interface StatCardProps {
-    title: string;
-    value: number;
-    trend: string;
-}
+
 const StatCard = ({title, value, trend}: StatCardProps) => {
     const isTrendPositive = trend.startsWith("+");
     return(

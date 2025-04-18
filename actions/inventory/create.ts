@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { InventoryInput } from "@/lib/validations/inventory.validation";
 
@@ -7,6 +8,7 @@ import { InventoryInput } from "@/lib/validations/inventory.validation";
 export const createInventory = async (data: InventoryInput) => {
     try {
         const {name, description} = data;
+        const session = await auth();
         const existingInventory = await prisma.inventory.findFirst({
             where: {
                 name: {

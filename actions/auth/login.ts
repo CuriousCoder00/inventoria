@@ -18,10 +18,11 @@ export const Login = async (data: LoginInput) => {
     await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirectTo: existingUser.firstVisit ? "/onboarding" : "dashboard"
+      redirect: false
     });
     return { success: true, message: "Login successful", code: 200 };
   } catch (error) {
+    console.log(error)
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":

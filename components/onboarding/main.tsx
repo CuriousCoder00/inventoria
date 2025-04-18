@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import CreateInventoryForm from "../main/create-inventory-form";
+import CreateInventoryForm from "./create-inventory-form";
 const OnboardingMain = () => {
   return (
     <div className="flex flex-col w-full text-start items-start justify-center">

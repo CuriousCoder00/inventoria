@@ -1,3 +1,7 @@
+// "use server";
+// import { auth } from "@/auth";
+
+// const session = await auth();
 /**
  * An array of routes that are accessible to public
  * These routes do not need authentication/login
@@ -23,5 +27,4 @@ export const apiAuthPrefix = "/api/auth";
 /**
  * The default redirect path after logged in
  */
-export const NEW_USER_REDIRECT = "/onboarding";
 export const DEFAULT_LOGIN_REDIRECT = "/dashboard";

@@ -39,7 +39,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.lastName = token.lastName ?? "";
         session.user.email = token.email ?? "";
         session.user.isOAuth = token.isOAuth;
-        session.user.firstVisit = token.firstVisit ?? null;
+        session.user.avatar = token.avatar ?? null;
       }
       return session;
     },
@@ -50,10 +50,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (!existingUser) return token;
       const existingAccount = await getAccountByUserId(existingUser.id);
       token.isOAuth = !!existingAccount;
-      token.firstName = existingUser.firstName;
-      token.lastName = existingUser.lastName;
-      token.firstVisit = existingUser.firstVisit;
-      token.email = existingUser.email;
+      token.firstName = existingUser.firstName as string;
+      token.lastName = existingUser.lastName as string;
+      token.email = existingUser.email as string;
+      token.avatar = existingUser.avatar as string | null;
       return token;
     },
   },

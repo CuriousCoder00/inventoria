@@ -18,10 +18,15 @@ import { EyeIcon, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { Login } from "@/actions/auth/login";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { DEFAULT_LOGIN_REDIRECT } from "@/lib/routes";
 
 const LoginForm = () => {
   const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
+
+  const router = useRouter();
+
   const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -42,6 +47,7 @@ const LoginForm = () => {
           toast.success(res.message, {
             duration: 3000,
           });
+          router.refresh();
         } else {
           if(res.warn) {
             toast.warning(res.message, {

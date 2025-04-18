@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -15,13 +16,11 @@ model User {
   firstName String
   lastName  String
 
-  image String? @db.Text
+  avatar String? @db.Text
 
   password    String
   inventories Inventory[]
   accounts    Account[]
-
-  firstVisit DateTime?
 
   emailVerified DateTime?
 

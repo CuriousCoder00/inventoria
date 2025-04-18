@@ -9,15 +9,24 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ImageDown } from "lucide-react";
+import { Store } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { signOut, useSession } from "next-auth/react";
 
 export function SidebarMain() {
   const links = [
     {
       label: "Dashboard",
-      href: "#",
+      href: "/dashboard",
       icon: (
         <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
+    },
+    {
+      label: "Inventories",
+      href: "/inventories",
+      icon: (
+        <Store className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
@@ -29,7 +38,7 @@ export function SidebarMain() {
     },
     {
       label: "Settings",
-      href: "#",
+      href: "/settings",
       icon: (
         <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
@@ -43,6 +52,9 @@ export function SidebarMain() {
     },
   ];
   const [open, setOpen] = useState(false);
+  const session = useSession();
+  const user = session?.data?.user;
+  console.log(user);
   return (
     <Sidebar open={open} setOpen={setOpen}>
       <SidebarBody className="justify-between gap-10">
@@ -51,17 +63,33 @@ export function SidebarMain() {
             <Logo />
           </>
           <div className="mt-8 flex flex-col gap-2">
-            {links.map((link, idx) => (
-              <SidebarLink key={idx} link={link} />
-            ))}
+            {links.map((link, idx) =>
+              link.label !== "Logout" ? (
+                <SidebarLink key={idx} link={link} />
+              ) : (
+                <Link
+                  key={idx}
+                  href="#"
+                  onClick={() => signOut()}
+                  className="flex items-center justify-start gap-2 py-2 text-neutral-700 dark:text-neutral-200"
+                >
+                  {link.icon}
+                  <span className="text-sm whitespace-pre">{link.label}</span>
+                </Link>
+              )
+            )}
           </div>
         </div>
         <div>
           <SidebarLink
             link={{
-              label: "Manu Arora",
+              label: user?.firstName + " " + user?.lastName,
               href: "#",
-              icon: (<ImageDown/>),
+              icon: profileAvatar({
+                firstName: user?.firstName ? user?.firstName : "John",
+                lastName: user?.lastName ? user?.lastName : "Doe",
+                avatar: user?.avatar,
+              }),
             }}
           />
         </div>
@@ -69,6 +97,24 @@ export function SidebarMain() {
     </Sidebar>
   );
 }
+export const profileAvatar = ({
+  firstName,
+  lastName,
+  avatar,
+}: {
+  firstName: string;
+  lastName: string;
+  avatar: string;
+}) => {
+  return (
+    <Avatar>
+      <AvatarImage src={avatar} />
+      <AvatarFallback>
+        {firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase()}
+      </AvatarFallback>
+    </Avatar>
+  );
+};
 export const Logo = () => {
   return (
     <Link
@@ -81,7 +127,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium whitespace-pre text-black dark:text-white"
       >
-        Acet Labs
+        Inventoria
       </motion.span>
     </Link>
   );
@@ -96,4 +142,3 @@ export const LogoIcon = () => {
     </Link>
   );
 };
-

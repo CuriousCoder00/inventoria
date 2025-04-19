@@ -19,7 +19,7 @@ export async function sendVerificationMail(email: string, name: string) {
       },
     });
     const verificationToken = await getVerificationTokenByEmail(email);
-    const verificationLink = `${process.env.NEXTAUTH_URL}/auth/verify-email?token=${verificationToken?.token}`;
+    const verificationLink = `${process.env.NEXTAUTH_URL}/auth/verify?token=${verificationToken?.token}`;
     const info = await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,

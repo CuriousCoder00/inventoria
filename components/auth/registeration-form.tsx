@@ -22,10 +22,14 @@ import { Register } from "@/actions/auth/register";
 import Link from "next/link";
 import { PropagateLoader } from "react-spinners";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 const RegistrationForm = () => {
   const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
+  const router = useRouter();
+
   const form = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -50,6 +54,7 @@ const RegistrationForm = () => {
           description: res.desc,
           duration: 3000,
         });
+        router.push("/auth/verify-your-email?email=" + data.email);
       } else {
         toast.error(res.message, {
           duration: 3000,

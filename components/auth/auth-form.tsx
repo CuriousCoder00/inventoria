@@ -8,7 +8,7 @@ const AuthForm = ({
   form,
 }: {
   children: React.ReactNode;
-  form: any;
+  form: any /* eslint-disable-line @typescript-eslint/no-explicit-any */;
 }) => {
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input border border-border">

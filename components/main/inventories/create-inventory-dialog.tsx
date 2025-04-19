@@ -18,7 +18,6 @@ import {
 } from "@/lib/validations/inventory.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useSession } from "next-auth/react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,7 +27,6 @@ const CreateInventoryDialog = () => {
   const [nameExists, setNameExists] = React.useState<boolean | null>(null);
   const [inventoryName, setInventoryName] = React.useState("");
   const [checking, setChecking] = React.useState(false);
-  const session = useSession();
   const form = useForm<InventoryInput>({
     resolver: zodResolver(inventorySchema),
     defaultValues: {
@@ -65,11 +63,13 @@ const CreateInventoryDialog = () => {
       setLoading(true);
       const res = await createInventory(data);
       if (res.success) {
-        res.warn
-          ? toast.warning(res.message, { duration: 3000 })
-          : toast.success(res.message, {
-              duration: 3000,
-            });
+        if (res.warn) {
+          toast.warning(res.message, { duration: 3000 });
+        } else {
+          toast.success(res.message, {
+            duration: 3000,
+          });
+        }
       } else {
         toast.error(res.message, {
           duration: 3000,

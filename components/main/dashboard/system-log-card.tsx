@@ -1,5 +1,4 @@
 import { SystemLogCardProps } from "@/lib/index.types";
-import { register } from "module";
 import React from "react";
 
 const SystemLogCard = ({

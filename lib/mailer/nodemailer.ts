@@ -27,7 +27,7 @@ export async function sendVerificationMail(email: string, name: string) {
       html: verificationMailHTML.replace("{{ user_name }}", name).replace("{{verification_link}}", verificationLink),
     });
     return info;
-  } catch (error: any) {
+  } catch (error: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
     return error.message;
   }
 }
@@ -55,7 +55,7 @@ export async function sendPasswordResetLink(email: string, name: string) {
       html: resetPassMailHTML.replace("{{ user_name }}", name).replace("{{reset_link}}", resetPasswordLink),
     });
     return info;
-  } catch (error: any) {
+  } catch (error: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
     return error.message;
   }
 }

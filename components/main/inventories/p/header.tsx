@@ -1,4 +1,3 @@
-import { PublicInventoryHeaderProps } from '@/lib/index.types';
 import React from 'react'
 
 const PublicInventoryHeader = ({name}:{name: string}) => {

@@ -26,7 +26,7 @@ const VerifyEmailPage = () => {
         });
         setLoading(false);
       }
-    } catch (error: any) {
+    } catch (error: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
       console.log(error);
       toast.error("Something went wrong", {
         duration: 3000,

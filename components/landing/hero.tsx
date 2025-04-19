@@ -57,7 +57,7 @@ export const Hero = () => {
       <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
         <div>
           <Badge className="bg-transparent text-foreground border-2 border-border pl-2 flex items-center justify-center gap-3">
-            <AtomIcon className="animate-spin text-blue-600" /> We're live
+            <AtomIcon className="animate-spin text-blue-600" /> We&apos;re live
           </Badge>
         </div>
         <div className="flex gap-4 flex-col">

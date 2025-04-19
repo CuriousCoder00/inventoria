@@ -86,7 +86,7 @@ const NewPassword = () => {
           </h1>
           <p className="text-md text-muted-foreground">
             Enter a new password for your account. Make sure to choose a strong
-            password that you haven't used before.
+            password that you haven&apos;t used before.
           </p>
           <form
             className="flex flex-col space-y-4 mt-6 w-full"

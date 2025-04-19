@@ -14,7 +14,7 @@ const InventoryLogs = ({inventoryId}:{inventoryId: string}) => {
       if (res) {
         setLogs(res);
       }
-    } catch (error: any) {
+    } catch (error: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
       console.error("Error fetching system logs:", error.message);
     }
   };
@@ -22,6 +22,13 @@ const InventoryLogs = ({inventoryId}:{inventoryId: string}) => {
     fetchLogs();
     setLoading(false);
   }, []);
+  if(loading) {
+    return (
+      <div className="flex items-center justify-center w-full h-full p-4 text-gray-500 dark:text-gray-400">
+        Fetching Logs...
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col items-start justify-start w-full h-full gap-4 overflow-y-auto max-h-[50dvh]">
       <div className="flex flex-col w-full gap-4">

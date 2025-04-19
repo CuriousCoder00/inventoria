@@ -5,7 +5,6 @@ import {
   CardContent,
   CardHeader,
   CardDescription,
-  CardFooter,
 } from "@/components/ui/card";
 import { InventoryCardProps } from "@/lib/index.types";
 import { AvatarImage } from "@radix-ui/react-avatar";

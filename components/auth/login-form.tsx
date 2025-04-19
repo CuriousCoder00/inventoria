@@ -18,13 +18,10 @@ import { EyeIcon, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { Login } from "@/actions/auth/login";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
-
-  const router = useRouter();
 
   const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
@@ -70,7 +67,7 @@ const LoginForm = () => {
   return (
     <AuthForm form={form}>
       <div className="my-4 flex items-center gap-2 justify-start">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link
           className="text-sm hover:underline text-sky-500"
           href={"/auth/register"}

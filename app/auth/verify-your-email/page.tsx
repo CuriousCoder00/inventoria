@@ -28,7 +28,7 @@ const VerifyRequestPage = () => {
         });
         setLoading(false);
       }
-    } catch (error: any) {
+    } catch (error: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
       toast.error(error.message || "Something went wrong..", {
         duration: 3000,
       });
@@ -50,7 +50,7 @@ const VerifyRequestPage = () => {
           inbox and click the link to verify your email address.
         </p>
         <p className="text-sm text-center text-gray-600 dark:text-gray-400">
-          If you don't see the email, please check your spam folder or request a
+          If you don&apos;t see the email, please check your spam folder or request a
           new verification email.
         </p>
         <div className="flex flex-col items-center justify-center gap-2 w-full mt-4">

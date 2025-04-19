@@ -1,3 +1,4 @@
+export const runtime = "nodejs"; // This is required for NextAuth to work with Next.js 13+ App Router
 import type { NextAuthConfig, User } from "next-auth";
 
 import Google from "next-auth/providers/google";

@@ -52,3 +52,19 @@ export interface SystemLogCardProps {
     message: string;
     createdAt: Date;
 }
+
+export interface InventoryLogTypes {
+    id: number;
+    createdAt: Date;
+    entityType: string;
+    entityId: number | null;
+    action: string;
+    message: string;
+    inventoryId: number;
+}
+
+export interface InventoryLogCardProps {
+    actionType: string;
+    message: string;
+    createdAt: Date;
+}

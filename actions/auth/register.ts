@@ -20,7 +20,7 @@ export const Register = async (data: RegisterInput) => {
       await bcryptjs.genSalt(10)
     );
     // Register user
-    await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         firstName,
         lastName,
@@ -30,7 +30,7 @@ export const Register = async (data: RegisterInput) => {
     });
     await prisma.systemActivityLog.create({
       data: {
-        userId: email,
+        userId: user.id,
         action: `register`,
         message: `You registered successfully`,
       },

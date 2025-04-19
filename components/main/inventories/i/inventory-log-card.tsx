@@ -1,12 +1,11 @@
-import { SystemLogCardProps } from "@/lib/index.types";
-import { register } from "module";
+import { InventoryLogCardProps } from "@/lib/index.types";
 import React from "react";
 
-const SystemLogCard = ({
+const InventoryLogCard = ({
   actionType,
   createdAt,
   message,
-}: SystemLogCardProps) => {
+}: InventoryLogCardProps) => {
   const colorClass = actionTypeColors[actionType] || "border-l-gray-400";
   return (
     <div
@@ -24,12 +23,11 @@ const SystemLogCard = ({
   );
 };
 
-export default SystemLogCard;
+export default InventoryLogCard;
 
 const actionTypeColors: Record<string, string> = {
   created_inventory: "border-l-green-500",
   deleted_inventory: "border-l-red-500",
   updated_inventory: "border-l-yellow-500",
-  register: "border-l-blue-500",
   // Add more as needed
 };

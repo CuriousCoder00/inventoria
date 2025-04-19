@@ -25,5 +25,27 @@ export const loginSchema = z.object({
     password: z.string().min(6, "Password must be at least 6 characters long"),
 });
 
+export const forgotPasswordSchema = z.object({
+    email: z.string().email("Invalid email address"),
+})
+
+export const newPasswordSchema = z.object({
+    password: z
+        .string()
+        .min(6, "Password must be at least 6 characters long")
+        .refine((value) => {
+            const regex =
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/;
+            return regex.test(value);
+        }, "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"),
+    confirmPassword: z
+        .string()
+        .min(6, "Password must be at least 6 characters long")
+}).refine((data) => data.password === data.confirmPassword, {
+    message: "Password do not match",
+})
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+export type NewPasswordInput = z.infer<typeof newPasswordSchema>;

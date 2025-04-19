@@ -52,7 +52,7 @@ export async function sendPasswordResetLink(email: string, name: string) {
       from: process.env.EMAIL_USER,
       to: email || "",
       subject: "Reset your password",
-      html: resetPassMailHTML.replace("{{ user_name }}", name).replace("{{reset_password_link}}", resetPasswordLink),
+      html: resetPassMailHTML.replace("{{ user_name }}", name).replace("{{reset_link}}", resetPasswordLink),
     });
     return info;
   } catch (error: any) {

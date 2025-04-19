@@ -49,7 +49,7 @@ const RegistrationForm = () => {
     try {
       setLoading(true);
       const res = await Register(data);
-      if(res.success) {
+      if (res.success) {
         toast.success(res.message, {
           description: res.desc,
           duration: 3000,
@@ -65,7 +65,7 @@ const RegistrationForm = () => {
       console.log(error);
       toast.error("Something went wrong", {
         duration: 3000,
-      })
+      });
     }
   };
 
@@ -223,6 +223,16 @@ const RegistrationForm = () => {
           )}
         </button>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-2 h-[1px] w-full" />
+        <p className="text-sm text-muted-foreground text-center">
+          By creating a new account, you agree to our{" "}
+          <Link href="/terms" className="text-sky-500 hover:underline">
+            Terms of Service
+          </Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="text-sky-500 hover:underline">
+            Privacy Policy
+          </Link>
+        </p>
       </form>
     </AuthForm>
   );

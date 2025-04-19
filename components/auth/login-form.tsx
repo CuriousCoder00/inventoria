@@ -38,34 +38,34 @@ const LoginForm = () => {
     form.setValue(e.target.name as keyof LoginInput, e.target.value);
   };
 
-    const onLogin = async (data: LoginInput) => {
-      try {
-        setLoading(true);
-        const res = await Login(data);
-        if(res.success) {
-          toast.success(res.message, {
+  const onLogin = async (data: LoginInput) => {
+    try {
+      setLoading(true);
+      const res = await Login(data);
+      if (res.success) {
+        toast.success(res.message, {
+          duration: 3000,
+        });
+        router.refresh();
+      } else {
+        if (res.warn) {
+          toast.warning(res.message, {
+            duration: 5000,
+          });
+        } else {
+          toast.error(res.message, {
             duration: 3000,
           });
-          router.refresh();
-        } else {
-          if(res.warn) {
-            toast.warning(res.message, {
-              duration: 5000
-            })
-          } else {
-            toast.error(res.message, {
-              duration: 3000,
-            });
-          }
         }
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        toast.error("Something went wrong", {
-          duration: 3000,
-        })
       }
-    };
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong", {
+        duration: 3000,
+      });
+    }
+  };
 
   return (
     <AuthForm form={form}>
@@ -84,7 +84,10 @@ const LoginForm = () => {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-2 h-[1px] w-full" />
       </div>
       <h4 className="font-bold text-lg my-4">Login to your account</h4>
-      <form className="my-8 flex flex-col space-y-4" onSubmit={form.handleSubmit(onLogin)}>
+      <form
+        className="my-8 flex flex-col space-y-4"
+        onSubmit={form.handleSubmit(onLogin)}
+      >
         <FormField
           control={form.control}
           name="email"

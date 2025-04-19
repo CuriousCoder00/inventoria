@@ -9,7 +9,6 @@ export const createInventory = async (data: InventoryInput) => {
     try {
         const {name, description} = data;
         const session = await auth();
-        console.log(session)
         const existingInventory = await prisma.inventory.findFirst({
             where: {
                 name: {

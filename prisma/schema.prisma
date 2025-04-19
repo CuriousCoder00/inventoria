@@ -75,7 +75,7 @@ model Inventory {
 
   image String? @db.Text
 
-  status InventoryStatus @default(ACTIVE)
+  status InventoryStatus @default(DRAFT)
 
   user   User   @relation(fields: [userId], references: [id])
   userId String

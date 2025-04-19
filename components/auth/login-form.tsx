@@ -46,7 +46,7 @@ const LoginForm = () => {
         toast.success(res.message, {
           duration: 3000,
         });
-        router.refresh();
+        window.location.href = "/dashboard";
       } else {
         if (res.warn) {
           toast.warning(res.message, {

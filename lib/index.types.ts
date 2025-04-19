@@ -33,3 +33,8 @@ export interface Items {
     status: string;
     inventoryId: number;
 }
+
+export interface PublicInventoryHeaderProps {
+    name:string;
+    image: string | null;
+}

@@ -29,7 +29,7 @@ const InventoryCard = ({
                 alt="Inventory Image"
                 className="w-10 h-10 rounded-full"
               />
-              <AvatarFallback className="w-10 h-10 rounded-full bg-gray-200 text-gray-500">
+              <AvatarFallback className="rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">
                 {name.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>

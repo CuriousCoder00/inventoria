@@ -5,6 +5,7 @@ import InventoryCard from "@/components/main/inventories/inventory-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Inventory } from "@/lib/index.types";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
 
 const InventoryPage = () => {
@@ -17,7 +18,7 @@ const InventoryPage = () => {
     const fetchInventories = async () => {
       setLoading(true);
       const res = await getAllInventory(session?.data?.user.id as string);
-      console.log(res)
+      console.log(res);
       if (res.success) {
         setInventories(res.inventories);
       } else {
@@ -43,14 +44,20 @@ const InventoryPage = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 w-full">
               {inventories?.map((inventory) => (
-                <InventoryCard
+                <Link
+                  href={`/inv/i/${inventory.id}`}
                   key={inventory.id}
-                  name={inventory.name}
-                  description={inventory.description}
-                  items={inventory.items}
-                  status={inventory.status}
-                  image={inventory.image}
-                />
+                  className="w-full h-full"
+                >
+                  <InventoryCard
+                    key={inventory.id}
+                    name={inventory.name}
+                    description={inventory.description}
+                    items={inventory.items}
+                    status={inventory.status}
+                    image={inventory.image}
+                  />
+                </Link>
               ))}
             </div>
           )}

@@ -24,7 +24,7 @@ export function SidebarMain() {
     },
     {
       label: "Inventories",
-      href: "/inventories",
+      href: "/inv",
       icon: (
         <Store className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),

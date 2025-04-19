@@ -31,6 +31,22 @@ export const createInventory = async (data: InventoryInput) => {
                 userId: session?.user.id as string,
             }
         })
+        await prisma.systemActivityLog.create({
+            data: {
+                userId: session?.user.id as string,
+                action: `created_inventory`,
+                message: `You created an inventory ${name}`,
+            }
+        })
+        await prisma.inventoryActivityLog.create({
+            data: {
+                inventoryId: inventory.id,
+                action: `created_inventory`,
+                message: `You created an inventory ${name}`,
+                entityType: "inventory",
+                entityId: inventory.id,
+            }
+        })
         return {
             success: true,
             message: "Inventory created successfully",

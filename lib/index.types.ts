@@ -38,3 +38,17 @@ export interface PublicInventoryHeaderProps {
     name:string;
     image: string | null;
 }
+
+export interface SystemLogTypes {
+    id: number;
+    createdAt: Date;
+    userId: string;
+    action: string;
+    message: string;
+}
+
+export interface SystemLogCardProps {
+    actionType: string;
+    message: string;
+    createdAt: Date;
+}

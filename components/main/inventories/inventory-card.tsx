@@ -19,7 +19,7 @@ const InventoryCard = ({
   image,
 }: InventoryCardProps) => {
   return (
-    <Card>
+    <Card className="flex flex-col justify-between py-4 rounded-lg h-full">
       <CardHeader>
         <div className="flex item-center justify-between">
           <div className="flex items-center justify-start w-full h-full gap-2">
@@ -33,10 +33,10 @@ const InventoryCard = ({
                 {name.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <h3 className="text-lg font-semibold uppercase">{name}</h3>
+            <h3 className="text-md font-semibold uppercase">{name}</h3>
           </div>
           <Badge
-            className="text-xs"
+            className="text-xs h-6"
             variant={
               (status as
                 | "default"

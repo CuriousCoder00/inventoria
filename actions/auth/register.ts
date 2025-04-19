@@ -28,6 +28,14 @@ export const Register = async (data: RegisterInput) => {
         password: hashedPassword,
       },
     });
+    await prisma.systemActivityLog.create({
+      data: {
+        userId: email,
+        action: `register`,
+        message: `You registered successfully`,
+      },
+    });
+    // Generate verification token and send email
     const verificationToken = await generateVerificationToken(email);
     await sendVerificationMail(verificationToken.email, firstName);
     return { success: true, code: 200, message: "User registration successful.", desc: "We've sent you a mail with verification link." };

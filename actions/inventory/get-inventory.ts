@@ -19,3 +19,21 @@ export const getAllInventory = async (userId: string) => {
         return {success: false, inventories: null, message: error.message || "Something went wrong."}
     }
 }
+
+export const getInventoryById = async (id: number) => {
+    try {
+        const inventory = await prisma.inventory.findUnique({
+            where:{
+                id: id
+            },
+            include: {
+                items: true,
+            }
+        })
+        if(!inventory) return {success: false, inventory: null, message: "Inventory not found."}
+        return {success: true, inventory, message: "Inventory fetched successfully."}
+    } catch (error: any) {
+        console.log(error)
+        return {success: false, inventory: null, message: error.message || "Something went wrong."}
+    }
+}

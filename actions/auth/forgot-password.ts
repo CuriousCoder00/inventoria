@@ -43,6 +43,13 @@ export const createNewPassword = async (password: string, token: string) => {
                 password: hashedPassword,
             },
         });
+        await prisma.systemActivityLog.create({
+            data: {
+                userId: user.id,
+                action: `reset_password`,
+                message: `You reset your password`,
+            },
+        });
         if (!user) return { success: false, message: "User not found" };
         await prisma.passwordResetToken.delete({
             where: {

@@ -31,7 +31,7 @@ export const InventorySidebarLink = ({
   return (
     <Link
       href={link}
-      className={`w-full px-2 py-1 text-sm font-semibold text-left transition-colors duration-200 ease-in-out ${
+      className={`w-full p-2 text-sm font-semibold text-left transition-colors duration-200 ease-in-out ${
         isActive
           ? "bg-neutral-200 dark:bg-neutral-700 text-foreground border-l-2 border-l-foreground"
           : "hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-foreground hover:border-l-2 hover:border-l-foreground"

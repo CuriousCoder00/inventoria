@@ -21,10 +21,14 @@ const DashboardPage = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 w-full">
-        <StatCard title="Total Products" value={0} trend="+12.5%" />
-        <StatCard title="Total Sales" value={0} trend="+12.5%" />
-        <StatCard title="Total Visits" value={0} trend="+12.5%" />
-        <StatCard title="Total Customers" value={0} trend="+12.5%" />
+        {stats.map((stat, index) => (
+          <StatCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            trend={stat.trend}
+          />
+        ))}
       </div>
       <div className="flex flex-col items-start justify-start w-full mt-6 gap-4">
         <h2 className="text-lg font-semibold">Recent Activity</h2>
@@ -35,3 +39,10 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+const stats = [
+  { title: "Total Products", value: 0, trend: "+12.5%" },
+  { title: "Total Sales", value: 0, trend: "+12.5%" },
+  { title: "Total Visits", value: 0, trend: "+12.5%" },
+  { title: "Total Customers", value: 0, trend: "+12.5%" },
+];

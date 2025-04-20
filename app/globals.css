@@ -142,3 +142,7 @@
     border-radius: 5px;
   }
 }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}

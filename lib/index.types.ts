@@ -4,6 +4,12 @@ export interface StatCardProps {
     trend: string;
 }
 
+export interface InventoryStatCardProps {
+    title: string;
+    value: string | number;
+    icon?: React.ReactNode;
+}
+
 export interface InventoryCardProps {
     name: string;
     description: string;
@@ -20,6 +26,7 @@ export interface Inventory {
     items: Items[];
     status: string;
     userId: string;
+    updatedAt: Date;
 }
 
 export interface Items {
@@ -35,7 +42,7 @@ export interface Items {
 }
 
 export interface PublicInventoryHeaderProps {
-    name:string;
+    name: string;
     image: string | null;
 }
 

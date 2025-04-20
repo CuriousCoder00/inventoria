@@ -7,9 +7,9 @@ const InventoryLayout = ({ children }: { children: React.ReactNode }) => {
   const params = useParams();
   const inventoryId = params?.inventoryId as string;
   return (
-    <div className="flex items-start justify-start w-full h-full gap-4">
+    <div className="flex items-start justify-start w-full h-full gap-4 overflow-hidden max-h-dvh">
       <InventorySidebar inventoryId={inventoryId} />
-      <div className="flex items-start justify-start w-full h-full p-4 overflow-hidden">
+      <div className="flex items-start justify-start w-full h-full p-4 overflow-hidden max-h-[90dvh]">
         {children}
       </div>
     </div>

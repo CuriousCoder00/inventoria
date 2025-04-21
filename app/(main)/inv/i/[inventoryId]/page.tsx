@@ -30,13 +30,44 @@ const InventoryPage = () => {
     };
     fetchInventory();
   }, []);
-  if(loading) {
+  if (loading) {
     return (
-      <div className="flex items-center justify-center w-full h-full">
-        Fetching Inventory Details...
+      <div className="flex items-center justify-center w-full h-full text-lg font-medium">
+        <span className="animate-pulse">Fetching Inventory Details...</span>
       </div>
     );
   }
+  if (!loading && !inventory) {
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        Inventory not found.
+      </div>
+    );
+  }
+  const totalItems = inventory?.items?.length ?? 0;
+  const totalStockValue =
+    inventory?.items?.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    ) ?? 0;
+  const totalLowStockItems =
+    inventory?.items?.filter((item) => item.quantity < 5).length ?? 0;
+  const totalOutOfStockItems =
+    inventory?.items?.filter((item) => item.quantity === 0).length ?? 0;
+  const stats = [
+    { title: "Total Products", value: totalItems, icon: <PackageCheck /> },
+    {
+      title: "Stock Value",
+      value: `${totalStockValue} Rs.`,
+      icon: <DollarSign />,
+    },
+    {
+      title: "Low Stock Items",
+      value: totalLowStockItems,
+      icon: <AlertTriangle />,
+    },
+    { title: "Out of Stock", value: totalOutOfStockItems, icon: <PackageX /> },
+  ];
   return (
     <div className="flex flex-col items-start justify-start w-full relative h-full max-w-[88vh] overflow-y-auto min-w-full no-scrollbar">
       <InventoryHeader
@@ -68,10 +99,3 @@ const InventoryPage = () => {
 };
 
 export default InventoryPage;
-
-const stats = [
-  { title: "Total Products", value: 128, icon: <PackageCheck /> },
-  { title: "Stock Value", value: "$4,520", icon: <DollarSign /> },
-  { title: "Low Stock Items", value: 12, icon: <AlertTriangle /> },
-  { title: "Out of Stock", value: 5, icon: <PackageX /> },
-];

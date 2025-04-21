@@ -37,3 +37,39 @@ export const getInventoryById = async (id: number) => {
         return {success: false, inventory: null, message: error.message || "Something went wrong."}
     }
 }
+
+export const getPublicInventories = async () => {
+    try {
+        const inventories = await prisma.inventory.findMany({
+            where:{
+                published: true
+            },
+            include: {
+                items: true,
+            }
+        })
+        if(!inventories) return {success: true, inventories: null, message: "No public inventories found."}
+        return {success: true, inventories, message: "Public inventories fetched successfully."}
+    } catch (error: any) {
+        console.log(error)
+        return {success: false, inventories: null, message: error.message || "Something went wrong."}
+    }
+}
+
+export const getInventoryPublishedStatus = async (id: number) => {
+    try {
+        const res = await prisma.inventory.findUnique({
+            where: {
+                id: id
+            },
+            select: {
+                published: true
+            }
+        })
+        if(!res) return { success: false, published: false }
+        return { success: true, published: res.published }
+    } catch (error: any) {
+        console.log(error)
+        return { success: false, published: false }
+    }
+}

@@ -5,11 +5,16 @@ import React from "react";
 
 const InventoryStatusNotification = ({
   inventoryId,
+  status
 }: {
   inventoryId: number;
+  status: boolean;
 }) => {
-  const [hidden, setHidden] = React.useState(false);
-  const [isDraft, setIsDraft] = React.useState(true);
+  const [hidden, setHidden] = React.useState(true);
+  const [isDraft, setIsDraft] = React.useState(false);
+  React.useEffect(() => {
+    setIsDraft(status);
+  }, [status]);
   const handleClose = () => {
     setHidden(true);
   };

@@ -75,7 +75,7 @@ model Inventory {
   description String
 
   image String? @db.Text
-
+  published Boolean @default(false)
   status InventoryStatus @default(DRAFT)
 
   user   User   @relation(fields: [userId], references: [id])

@@ -119,7 +119,7 @@ export const MobileSidebar = ({
         )}
         {...props}
       >
-        <div className="flex justify-end z-20 w-full">
+        <div className="fixed flex justify-end z-20 w-full inset-x-0 top-0 px-4 py-2">
           <IconMenu2
             className="text-neutral-800 dark:text-neutral-200"
             onClick={() => setOpen(!open)}

@@ -109,7 +109,7 @@ model Item {
   category String
   tags     String[] @db.Text
 
-  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
   inventoryId Int
 
   createdAt DateTime @default(now())
@@ -156,7 +156,7 @@ model SystemActivityLog {
   message   String
   createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model InventoryActivityLog {
@@ -168,5 +168,5 @@ model InventoryActivityLog {
   message     String
   createdAt   DateTime @default(now())
 
-  inventory Inventory @relation(fields: [inventoryId], references: [id])
+  inventory Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
 }

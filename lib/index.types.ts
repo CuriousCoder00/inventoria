@@ -13,7 +13,7 @@ export interface InventoryStatCardProps {
 export interface InventoryCardProps {
     name: string;
     description: string;
-    items: Items[];
+    items: Item[];
     status?: string;
     image?: string | null;
 }
@@ -23,13 +23,13 @@ export interface Inventory {
     name: string;
     description: string;
     image: string | null;
-    items: Items[];
+    items: Item[];
     status: string;
     userId: string;
     updatedAt: Date;
 }
 
-export interface Items {
+export interface Item {
     id: number;
     name: string;
     description: string;

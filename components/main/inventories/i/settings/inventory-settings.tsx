@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { deleteInventory } from "@/actions/inventory/delete";
 import { useRouter } from "next/navigation";
+import InventoryStatusNotification from "../status";
 
 const InventorySettingsForm = ({ inventoryId }: { inventoryId: number }) => {
   const router = useRouter();

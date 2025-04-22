@@ -56,6 +56,24 @@ export const getPublicInventories = async () => {
     }
 }
 
+export const getPublicInventoryById = async (id: number) => {
+    try {
+        const inventory = await prisma.inventory.findUnique({
+            where:{
+                id: id,
+                published: true
+            },
+            include: {
+                items: true,
+            }
+        })
+        if(!inventory) return {success: false, inventory: null, message: "Inventory not found."}
+        return {success: true, inventory, message: "Inventory fetched successfully."}
+    } catch (error: any) {
+        console.log(error)
+        return {success: false, inventory: null, message: error.message || "Something went wrong."}
+    }
+}
 export const getInventoryPublishedStatus = async (id: number) => {
     try {
         const res = await prisma.inventory.findUnique({

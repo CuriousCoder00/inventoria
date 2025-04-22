@@ -6,7 +6,7 @@
  * An array of routes that are accessible to public
  * These routes do not need authentication/login
  */
-export const publicRoutes = ["/"];
+export const publicRoutes = ["/", "/inv/p/*"];
 
 /**
  * An array of routes that are used for authentication
